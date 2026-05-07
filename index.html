@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>그릿행복여행 | K-MediWell 뇌과학 기반 청소년 여행 프로그램</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a14;
+    --cream: #faf8f2;
+    --sky: #4a9fd4;
+    --ocean: #1b6fa8;
+    --sunrise: #f4801a;
+    --gold: #e8b84b;
+    --sage: #5a9e7a;
+    --brain: #8b5cf6;
+    --wave: #2dd4bf;
+    --light-blue: #e8f4fd;
+    --light-green: #e8f5ee;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── GLOBAL HEADER ─── */
+  .global-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--sky);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .global-header .uni-badge {
+    background: linear-gradient(135deg, var(--ocean), var(--sky));
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: -0.3px;
+  }
+  .global-header .team-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ocean);
+    letter-spacing: -0.5px;
+  }
+  .global-header nav {
+    margin-left: auto;
+    display: flex;
+    gap: 20px;
+  }
+  .global-header nav a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .global-header nav a:hover { opacity: 1; color: var(--ocean); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    padding-top: 70px;
+    background: linear-gradient(160deg, #0d2137 0%, #1b4f72 40%, #1e7abf 75%, #4ab8d4 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-bg-waves {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    overflow: hidden;
+  }
+  .hero-bg-waves svg { width: 100%; height: 100%; }
+
+  .hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    animation: float-up linear infinite;
+  }
+  @keyframes float-up {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 120px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-left {}
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    animation: slide-in 0.8s ease both;
+  }
+  .hero-tag .dot {
+    width: 8px; height: 8px;
+    background: var(--wave);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:0.5} }
+
+  .hero-title {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    animation: slide-in 0.9s ease both;
+  }
+  .hero-title .accent { color: var(--gold); }
+  .hero-title .sub { font-size: 0.55em; color: rgba(255,255,255,0.8); display: block; margin-top: 8px; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; }
+
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+    animation: slide-in 1s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: slide-in 1.1s ease both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--sunrise), var(--gold));
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(244,128,26,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(244,128,26,0.5); }
+  .btn-ghost {
+    border: 2px solid rgba(255,255,255,0.5);
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.15); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: slide-in 1.2s ease both;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 20px 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .stat-icon { font-size: 36px; }
+  .stat-num { font-size: 28px; font-weight: 900; color: var(--gold); }
+  .stat-label { font-size: 13px; opacity: 0.8; margin-top: 2px; }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 100px 40px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--light-blue);
+    color: var(--ocean);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .section-title {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-title .em { color: var(--ocean); }
+  .section-desc {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
+    max-width: 640px;
+    margin-bottom: 60px;
+  }
+
+  /* ─── PROBLEM SECTION ─── */
+  .problem-section {
+    background: linear-gradient(180deg, #fff 0%, #f0f6ff 100%);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+  .problem-card {
+    background: white;
+    border-radius: 24px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    border-top: 4px solid transparent;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--ocean), var(--sky));
+  }
+  .problem-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,0.12); }
+  .problem-icon { font-size: 48px; margin-bottom: 16px; }
+  .problem-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .problem-text { font-size: 14px; color: #666; line-height: 1.7; }
+  .problem-quote {
+    border-left: 3px solid var(--sky);
+    padding-left: 16px;
+    font-style: italic;
+    color: #888;
+    font-size: 13px;
+    margin-top: 14px;
+  }
+
+  .arrow-banner {
+    background: linear-gradient(135deg, var(--ocean), var(--brain));
+    color: white;
+    border-radius: 20px;
+    padding: 36px 40px;
+    text-align: center;
+  }
+  .arrow-banner h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .arrow-banner p { font-size: 15px; opacity: 0.9; line-height: 1.7; }
+
+  /* ─── JOURNEY SECTION ─── */
+  .journey-section { background: var(--ink); }
+  .journey-section .section-title { color: white; }
+  .journey-section .section-desc { color: rgba(255,255,255,0.6); }
+  .journey-section .section-badge { background: rgba(255,255,255,0.1); color: var(--wave); }
+
+  .timeline {
+    position: relative;
+    padding: 40px 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--sky), var(--wave), var(--sage));
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    margin-bottom: 60px;
+    align-items: center;
+  }
+  .timeline-item:nth-child(odd) .tl-content { grid-column: 1; text-align: right; }
+  .timeline-item:nth-child(odd) .tl-empty { grid-column: 3; }
+  .timeline-item:nth-child(even) .tl-empty { grid-column: 1; }
+  .timeline-item:nth-child(even) .tl-content { grid-column: 3; text-align: left; }
+
+  .tl-node {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tl-dot {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky), var(--ocean));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 0 0 6px rgba(74,159,212,0.2);
+    flex-shrink: 0;
+  }
+
+  .tl-content {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin: 0 24px;
+    transition: background 0.3s;
+  }
+  .tl-content:hover { background: rgba(255,255,255,0.1); }
+  .tl-day { font-size: 11px; font-weight: 700; color: var(--wave); letter-spacing: 1px; margin-bottom: 8px; }
+  .tl-city { font-size: 20px; font-weight: 700; color: white; margin-bottom: 8px; }
+  .tl-activities { display: flex; flex-wrap: wrap; gap: 6px; justify-content: inherit; margin-bottom: 12px; }
+  .tl-tag {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  .tl-brain-note {
+    background: rgba(139,92,246,0.2);
+    border: 1px solid rgba(139,92,246,0.3);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: #c4b5fd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tl-empty { }
+
+  /* ─── NEUROSCIENCE SECTION ─── */
+  .neuro-section {
+    background: linear-gradient(160deg, #f8f0ff 0%, #ede9fe 100%);
+  }
+  .neuro-section .section-badge { background: rgba(139,92,246,0.1); color: var(--brain); }
+  .neuro-section .section-title .em { color: var(--brain); }
+
+  .neuro-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 60px;
+    overflow: visible;
+  }
+  .neuro-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+  .neuro-step-box {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 20px;
+    box-shadow: 0 4px 30px rgba(139,92,246,0.12);
+    margin: 0 8px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+    position: relative;
+  }
+  .neuro-step-box:hover { border-color: var(--brain); transform: translateY(-4px); }
+  .neuro-icon { font-size: 44px; margin-bottom: 12px; }
+  .neuro-phase { font-size: 10px; font-weight: 700; color: var(--brain); letter-spacing: 1px; margin-bottom: 6px; }
+  .neuro-step-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .neuro-step-text { font-size: 12px; color: #666; line-height: 1.6; }
+  .neuro-wave-badge {
+    background: linear-gradient(135deg, var(--brain), #a78bfa);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-top: 12px;
+    display: inline-block;
+  }
+
+  .neuro-arrow {
+    font-size: 24px;
+    color: var(--brain);
+    opacity: 0.5;
+    flex-shrink: 0;
+    padding: 0 4px;
+  }
+
+  .brain-viz {
+    background: var(--ink);
+    border-radius: 28px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .brain-left {}
+  .brain-left h3 { font-size: 24px; font-weight: 700; color: white; margin-bottom: 20px; }
+  .wave-list { display: flex; flex-direction: column; gap: 16px; }
+  .wave-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .wave-bar-wrap {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .wave-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--brain), var(--wave));
+    animation: grow-bar 2s ease forwards;
+    transform-origin: left;
+  }
+  @keyframes grow-bar { from { width: 0; } }
+  .wave-name { font-size: 12px; font-weight: 700; color: white; width: 60px; }
+  .wave-desc { font-size: 11px; color: rgba(255,255,255,0.5); width: 140px; }
+
+  .brain-right { text-align: center; }
+  .brain-emoji { font-size: 100px; display: block; margin-bottom: 20px; filter: drop-shadow(0 0 30px rgba(139,92,246,0.5)); animation: brain-glow 3s ease-in-out infinite; }
+  @keyframes brain-glow {
+    0%,100% { filter: drop-shadow(0 0 20px rgba(139,92,246,0.3)); }
+    50% { filter: drop-shadow(0 0 50px rgba(139,92,246,0.8)); }
+  }
+  .before-after {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+  .ba-card {
+    flex: 1;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+  }
+  .ba-card.before { background: rgba(255,255,255,0.06); }
+  .ba-card.after { background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4); }
+  .ba-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; color: rgba(255,255,255,0.5); }
+  .ba-card.after .ba-label { color: #c4b5fd; }
+  .ba-value { font-size: 22px; font-weight: 900; color: white; }
+
+  /* ─── SELF / IDENTITY SECTION ─── */
+  .identity-section { background: white; }
+  .identity-section .section-badge { background: var(--light-green); color: var(--sage); }
+  .identity-section .section-title .em { color: var(--sage); }
+
+  .choice-journey {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-bottom: 60px;
+    position: relative;
+  }
+  .choice-journey::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 12%;
+    right: 12%;
+    height: 3px;
+    background: linear-gradient(90deg, #ddd, var(--sage), var(--sky));
+    z-index: 0;
+  }
+  .choice-step {
+    text-align: center;
+    padding: 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .choice-num {
+    width: 48px; height: 48px;
+    background: white;
+    border: 3px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 900;
+    color: #ccc;
+    margin: 0 auto 16px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .choice-step.active .choice-num {
+    background: linear-gradient(135deg, var(--sage), var(--sky));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 8px 30px rgba(90,158,122,0.4);
+  }
+  .choice-step-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .choice-step-text { font-size: 12px; color: #777; line-height: 1.6; }
+
+  .identity-story {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border-radius: 28px;
+    padding: 48px;
+    border: 1px solid rgba(90,158,122,0.2);
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .story-text h3 { font-size: 24px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
+  .story-text p { font-size: 15px; color: #444; line-height: 1.85; margin-bottom: 16px; }
+  .story-text p strong { color: var(--sage); }
+  .story-cards { display: flex; flex-direction: column; gap: 14px; }
+  .story-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  }
+  .story-card-icon { font-size: 28px; flex-shrink: 0; }
+  .story-card-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .story-card-text { font-size: 12px; color: #666; line-height: 1.6; }
+
+  /* ─── YOUTUBE SECTION ─── */
+  .youtube-section {
+    background: linear-gradient(160deg, #fff7f0 0%, #fff3e0 100%);
+  }
+  .youtube-section .section-badge { background: rgba(244,128,26,0.1); color: var(--sunrise); }
+  .youtube-section .section-title .em { color: var(--sunrise); }
+
+  .yt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .yt-left h3 { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+  .yt-left p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 24px; }
+
+  .yt-steps { display: flex; flex-direction: column; gap: 16px; }
+  .yt-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .yt-step-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--sunrise), var(--gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    color: white;
+    flex-shrink: 0;
+  }
+  .yt-step-content { }
+  .yt-step-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .yt-step-text { font-size: 13px; color: #666; line-height: 1.6; }
+
+  .yt-right { }
+  .video-mockup {
+    background: var(--ink);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.25);
+  }
+  .vm-header {
+    background: #1a1a2e;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .vm-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .vm-dot:nth-child(1) { background: #ff5f57; }
+  .vm-dot:nth-child(2) { background: #febc2e; }
+  .vm-dot:nth-child(3) { background: #28c840; }
+  .vm-screen {
+    aspect-ratio: 16/9;
+    background: linear-gradient(160deg, #1a4a7a, #0d2137);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .vm-play {
+    width: 70px; height: 70px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 0 0 20px rgba(255,255,255,0.1);
+  }
+  .vm-play:hover { transform: scale(1.1); }
+  .vm-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, transparent 50%);
+  }
+  .vm-title-text { font-size: 14px; font-weight: 700; color: white; }
+  .vm-subtitle { font-size: 11px; color: rgba(255,255,255,0.7); }
+  .vm-info {
+    padding: 20px;
+    background: #111;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .vm-stat { text-align: center; }
+  .vm-stat-num { font-size: 18px; font-weight: 900; color: var(--gold); }
+  .vm-stat-label { font-size: 10px; color: rgba(255,255,255,0.4); }
+
+  /* ─── CORE VALUES ─── */
+  .values-section { background: var(--ink); }
+  .values-section .section-title { color: white; }
+  .values-section .section-desc { color: rgba(255,255,255,0.6); }
+  .values-section .section-badge { background: rgba(255,255,255,0.08); color: var(--gold); }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .value-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 36px 28px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .value-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-4px); }
+  .value-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+  .value-title { font-size: 18px; font-weight: 700; color: white; margin-bottom: 12px; }
+  .value-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+  .value-highlight {
+    margin-top: 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ─── APPLY CTA ─── */
+  .apply-section {
+    background: linear-gradient(135deg, var(--ocean) 0%, var(--brain) 100%);
+    text-align: center;
+    padding: 100px 40px;
+  }
+  .apply-section h2 {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .apply-section p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .apply-info {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .apply-info-item { color: white; text-align: center; }
+  .apply-info-item .label { font-size: 12px; opacity: 0.6; margin-bottom: 4px; }
+  .apply-info-item .value { font-size: 22px; font-weight: 700; }
+
+  .apply-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    color: var(--ocean);
+    font-size: 18px;
+    font-weight: 700;
+    padding: 18px 48px;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 12px 50px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .apply-btn:hover { transform: translateY(-3px); box-shadow: 0 18px 60px rgba(0,0,0,0.3); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #05060f;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 40px;
+    font-size: 13px;
+    line-height: 2;
+  }
+  footer strong { color: rgba(255,255,255,0.7); }
+
+  /* ─── BOOK REFERENCE BANNER ─── */
+  .book-banner {
+    background: linear-gradient(135deg, #1e3a5f, #2d5b8e);
+    border-radius: 24px;
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-top: 60px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .book-cover {
+    background: linear-gradient(160deg, #f4801a, #e8b84b);
+    border-radius: 12px;
+    width: 100px;
+    min-width: 100px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.4;
+    padding: 12px;
+    box-shadow: 6px 6px 20px rgba(0,0,0,0.3);
+  }
+  .book-info h4 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 8px; }
+  .book-info p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 40px; }
+    .hero-right { display: none; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .timeline::before { left: 24px; }
+    .timeline-item { grid-template-columns: 60px 1fr; }
+    .timeline-item:nth-child(odd) .tl-content,
+    .timeline-item:nth-child(even) .tl-content { grid-column: 2; text-align: left; }
+    .timeline-item:nth-child(odd) .tl-empty,
+    .timeline-item:nth-child(even) .tl-empty { display: none; }
+    .tl-node { grid-column: 1; }
+    .neuro-flow { flex-direction: column; }
+    .neuro-arrow { transform: rotate(90deg); }
+    .brain-viz { grid-template-columns: 1fr; }
+    .choice-journey { grid-template-columns: 1fr 1fr; }
+    .choice-journey::before { display: none; }
+    .story-grid { grid-template-columns: 1fr; }
+    .yt-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
+    .global-header nav { display: none; }
+    section { padding: 60px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- GLOBAL HEADER -->
+<header class="global-header">
+  <div class="uni-badge">국립공주대학교</div>
+  <div class="team-name">스마트의료웰니스관광대학원 K-MediWell 그릿행복여행팀</div>
+  <nav>
+    <a href="#problem">왜 여행인가</a>
+    <a href="#journey">여행 일정</a>
+    <a href="#neuroscience">뇌과학</a>
+    <a href="#identity">자아발견</a>
+    <a href="#youtube">유튜브</a>
+    <a href="#apply">참가신청</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <span class="dot"></span>
+        🧠 뇌과학으로 증명하는 청소년 힐링 여행
+      </div>
+      <h1 class="hero-title">
+        <span class="accent">그릿행복여행</span><br>
+        고생이 지혜가<br>되는 순간
+        <span class="sub">Grit Happiness Travel · 5박 6일 일본 간사이</span>
+      </h1>
+      <p class="hero-desc">
+        선택의 자유를 되찾고 싶은 청소년에게.<br>
+        매일 아침 명상, 뇌파 측정, 그리고 진짜 나를 만나는 여행.<br>
+        서효봉 작가의 『여행이 교육이 되는 순간』이 살아있는 5박 6일.
+      </p>
+      <div class="hero-cta">
+        <a href="#apply" class="btn-primary">🚀 2026년 7월 참가 신청</a>
+        <a href="#journey" class="btn-ghost">📅 일정 보기</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-icon">🧠</div>
+        <div>
+          <div class="stat-num">5박 6일</div>
+          <div class="stat-label">히메지 · 고베 · 교토 · 오사카 완전정복</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div>
+          <div class="stat-num">3회 측정</div>
+          <div class="stat-label">출발 전 · 여행 중 · 귀국 후 뇌파 변화 추적</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎬</div>
+        <div>
+          <div class="stat-num">나만의 영상</div>
+          <div class="stat-label">여행 유튜브 콘텐츠 제작으로 자존감 회복</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🌱</div>
+        <div>
+          <div class="stat-num">나는 누구인가</div>
+          <div class="stat-label">고생 속에서 발견하는 진짜 자아</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bg-waves">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none">
+      <path d="M0,80 C360,160 720,0 1080,100 C1260,150 1380,60 1440,80 L1440,200 L0,200 Z" fill="#faf8f2" opacity="0.95"/>
+    </svg>
+  </div>
+</section>
+
+<!-- PROBLEM / WHY SECTION -->
+<section class="problem-section" id="problem">
+  <div class="container">
+    <div class="section-badge">🤔 왜 청소년에게 여행인가</div>
+    <h2 class="section-title">학교와 집에서<br><span class="em">선택을 빼앗긴 아이들</span></h2>
+    <p class="section-desc">
+      서효봉 작가는 말합니다. "여행은 교과서가 줄 수 없는 교육을 준다." 아이들은 매일 타인의 선택에 따라 살아갑니다. 여행에서 처음으로, 자신이 고른 길을 걷습니다.
+    </p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">🏫</div>
+        <div class="problem-title">학교: 시간표대로 살기</div>
+        <p class="problem-text">등교 시간, 수업 과목, 앉는 자리, 먹는 급식까지. 청소년의 하루는 타인이 설계한 시간표 위를 달립니다. "내가 원하는 것"을 물어볼 틈이 없습니다.</p>
+        <div class="problem-quote">"오늘 뭐 하고 싶어?" — 이 질문에 선뜻 답하지 못하는 아이들</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🏠</div>
+        <div class="problem-title">집: 부모의 기대 속에서</div>
+        <p class="problem-text">학원 스케줄, 진로 방향, 생활 패턴. 집에서도 선택은 어른들의 몫입니다. 사랑 때문이지만, 아이는 서서히 "나는 누구인가"를 잃어갑니다.</p>
+        <div class="problem-quote">"어차피 내가 해도 안 돼" — 학습된 무기력의 시작</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📱</div>
+        <div class="problem-title">SNS: 비교 속의 자존감 상실</div>
+        <p class="problem-text">남의 화려한 일상을 보며 자신을 비교합니다. 좋아요 숫자가 자존감이 됩니다. 실패를 두려워하고, 도전을 포기합니다.</p>
+        <div class="problem-quote">"나는 별로인 것 같아" — 디지털 시대 청소년의 내면</div>
+      </div>
+    </div>
+    <div class="arrow-banner">
+      <h3>✈️ 그래서 우리는 여행을 처방합니다</h3>
+      <p>여행에서는 매 순간 선택해야 합니다. 어디서 먹을지, 어디로 갈지, 힘들 때 포기할지 계속 갈지.<br>
+      그 선택의 연속이 <strong>진짜 나를 깨웁니다</strong>. 그리고 뇌파가 그 변화를 과학적으로 증명합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY TIMELINE -->
+<section class="journey-section" id="journey">
+  <div class="container">
+    <div class="section-badge">🗓️ 5박 6일 여행 일정</div>
+    <h2 class="section-title" style="color:white">팬스타 크루즈로 출항!<br><span style="color:var(--wave)">간사이 완전 정복</span></h2>
+    <p class="section-desc">부산에서 크루즈로 출항, 히메지·고베·교토·오사카까지. 매일 아침 명상과 뇌파 기록. 아이와 함께, 때로는 힘들게, 그래서 더 깊이.</p>
+
+    <div class="timeline">
+
+      <!-- Day 1 -->
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="tl-day">DAY 1 · 7월 2일 목요일</div>
+          <div class="tl-city">⛴️ 부산 출항 · 선상 1박</div>
+          <div class="tl-activities">
+            <span class="tl-tag">16:00 출항</span>
+            <span class="tl-tag">🍽️ 뷔페 석식</span>
+            <span class="tl-tag">🌊 야외 포차</span>
+            <span class="tl-tag">🌅 석양 감상</span>
+          </div>
+          <div class="tl-brain-note">🧠 <strong>출발 전 뇌파 측정 완료</strong> — 원격 명상으로 기초 뇌파 기록. 알파파 기준치 측정.</div>
+        </div>
+        <div class="tl-node"><div class="tl-dot">⛴️</div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="timeline-item">
+        <div class="tl-empty"></div>
+        <div class="tl-node"><div class="tl-dot">🏯</div></div>
+        <div class="tl-content">
+          <div class="tl-day">DAY 2 · 7월 3일 금요일</div>
+          <div class="tl-city">🏯 히메지 성 + 고베 야경</div>
+          <div class="tl-activities">
+            <span class="tl-tag">☀️ 선상 아침 명상</span>
+            <span class="tl-tag">히메지 백로성</span>
+            <span class="tl-tag">고베 기타노</span>
+            <span class="tl-tag">하버랜드 야경</span>
+          </div>
+          <div class="tl-brain-note">🧠 <strong>아침 명상 1회차</strong> — 오사카 입항 직후 갑판 위 국악 호흡 명상. 첫 선택: 어디서 점심을 먹을까?</div>
+        </div>
+      </div>
+
+      <!-- Day 3 -->
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="tl-day">DAY 3 · 7월 4일 토요일</div>
+          <div class="tl-city">⛩️ 교토 풀코스</div>
+          <div class="tl-activities">
+            <span class="tl-tag">☀️ 아침 명상</span>
+            <span class="tl-tag">아라시야마 대나무숲</span>
+            <span class="tl-tag">금각사</span>
+            <span class="tl-tag">청수사 야경</span>
+          </div>
+          <div class="tl-brain-note">🧠 <strong>선택의 순간</strong> — 청수사 가는 오막리 골목에서 각자 다른 길을 선택. 아이는 처음으로 혼자 결정합니다.</div>
+        </div>
+        <div class="tl-node"><div class="tl-dot">⛩️</div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="timeline-item">
+        <div class="tl-empty"></div>
+        <div class="tl-node"><div class="tl-dot">🎡</div></div>
+        <div class="tl-content">
+          <div class="tl-day">DAY 4 · 7월 5일 일요일</div>
+          <div class="tl-city">🎡 오사카 자유 탐험</div>
+          <div class="tl-activities">
+            <span class="tl-tag">☀️ 아침 명상</span>
+            <span class="tl-tag">도톤보리</span>
+            <span class="tl-tag">오사카 성</span>
+            <span class="tl-tag">덴포잔 자유시간</span>
+          </div>
+          <div class="tl-brain-note">🧠 <strong>고생의 절정</strong> — 더위, 긴 이동, 언어 장벽. 힘든 선택들 속에서 그릿(GRIT)이 자랍니다. 저녁 성찰 일기 작성.</div>
+        </div>
+      </div>
+
+      <!-- Day 5-6 -->
+      <div class="timeline-item">
+        <div class="tl-content">
+          <div class="tl-day">DAY 5-6 · 7월 6-7일</div>
+          <div class="tl-city">🚢 귀국 크루즈 · 부산 귀환</div>
+          <div class="tl-activities">
+            <span class="tl-tag">☀️ 마지막 아침 명상</span>
+            <span class="tl-tag">🎬 영상 편집 시작</span>
+            <span class="tl-tag">성찰 발표</span>
+            <span class="tl-tag">🧠 귀국 후 뇌파 재측정</span>
+          </div>
+          <div class="tl-brain-note">🧠 <strong>귀국 후 뇌파 재측정</strong> — 알파파·베타파 변화 비교. 삶의 태도 변화를 데이터로 확인합니다.</div>
+        </div>
+        <div class="tl-node"><div class="tl-dot">🎉</div></div>
+        <div class="tl-empty"></div>
+      </div>
+
+    </div>
+
+    <!-- Book banner -->
+    <div class="book-banner">
+      <div class="book-cover">여행이<br>교육이<br>되는<br>순간<br><br>📖 서효봉</div>
+      <div class="book-info">
+        <h4>📚 참고 도서: 『여행이 교육이 되는 순간』 — 서효봉 작가</h4>
+        <p>
+          "아이와 함께 힘든 여행을 떠나라. 고생은 교과서가 줄 수 없는 것을 가르쳐 준다."<br>
+          서효봉 작가는 10년간 아이와 함께한 세계 여행에서 배운 것들을 이 책에 담았습니다.<br>
+          <strong>그릿행복여행은 이 철학을 뇌과학으로 증명합니다.</strong> 막연한 느낌이 아닌, 실시간 뇌파 데이터로 여행의 교육적 효과를 과학적으로 보여줍니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEUROSCIENCE SECTION -->
+<section class="neuro-section" id="neuroscience">
+  <div class="container">
+    <div class="section-badge">🧪 뇌과학 기반 프로그램</div>
+    <h2 class="section-title">여행의 효과를<br><span class="em">뇌파로 증명한다</span></h2>
+    <p class="section-desc">막연한 느낌이 아닙니다. 출발 전, 여행 중, 귀국 후 — 세 번의 뇌파 측정으로 여행이 뇌를 어떻게 바꾸는지 실시간으로 확인합니다.</p>
+
+    <div class="neuro-flow">
+      <div class="neuro-step">
+        <div class="neuro-step-box">
+          <div class="neuro-icon">🏠</div>
+          <div class="neuro-phase">BEFORE · 출발 전</div>
+          <div class="neuro-step-title">원격 명상 + 기초 뇌파 측정</div>
+          <p class="neuro-step-text">집에서 국악 호흡 명상을 실시합니다. 평상시 뇌파 상태를 과학적으로 기록, 알파파·베타파·세타파 기준치 확보.</p>
+          <div class="neuro-wave-badge">📊 기초 뇌파 데이터 확보</div>
+        </div>
+      </div>
+      <div class="neuro-arrow">→</div>
+      <div class="neuro-step">
+        <div class="neuro-step-box">
+          <div class="neuro-icon">✈️</div>
+          <div class="neuro-phase">DURING · 여행 중 (매일 아침)</div>
+          <div class="neuro-step-title">아침 명상 · 실시간 뇌파 추적</div>
+          <p class="neuro-step-text">5박 6일 매일 아침, 5~10분간의 국악 호흡 명상을 실시합니다. 고생과 선택의 반복이 뇌파를 어떻게 변화시키는지 추적합니다.</p>
+          <div class="neuro-wave-badge">🔄 일일 뇌파 변화 모니터링</div>
+        </div>
+      </div>
+      <div class="neuro-arrow">→</div>
+      <div class="neuro-step">
+        <div class="neuro-step-box">
+          <div class="neuro-icon">🏡</div>
+          <div class="neuro-phase">AFTER · 귀국 후</div>
+          <div class="neuro-step-title">사후 명상 + 최종 뇌파 분석</div>
+          <p class="neuro-step-text">귀국 후 동일한 조건에서 명상을 실시하고 뇌파를 재측정합니다. Before-After 비교로 삶의 태도 변화를 데이터로 확인합니다.</p>
+          <div class="neuro-wave-badge">✅ 변화 입증 리포트 제공</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brain-viz">
+      <div class="brain-left">
+        <h3>뇌파로 보는 여행의 힘</h3>
+        <div class="wave-list">
+          <div class="wave-item">
+            <div class="wave-name">알파파 α</div>
+            <div class="wave-bar-wrap"><div class="wave-bar" style="width:85%"></div></div>
+            <div class="wave-desc">이완·창의성·내면 집중</div>
+          </div>
+          <div class="wave-item">
+            <div class="wave-name">세타파 θ</div>
+            <div class="wave-bar-wrap"><div class="wave-bar" style="width:72%"></div></div>
+            <div class="wave-desc">깊은 명상·직관·감성</div>
+          </div>
+          <div class="wave-item">
+            <div class="wave-name">베타파 β</div>
+            <div class="wave-bar-wrap"><div class="wave-bar" style="width:60%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div></div>
+            <div class="wave-desc">긴장·스트레스 → 여행 후 감소</div>
+          </div>
+          <div class="wave-item">
+            <div class="wave-name">감마파 γ</div>
+            <div class="wave-bar-wrap"><div class="wave-bar" style="width:78%;background:linear-gradient(90deg,var(--wave),var(--sage))"></div></div>
+            <div class="wave-desc">고차원 인지·자기실현</div>
+          </div>
+        </div>
+      </div>
+      <div class="brain-right">
+        <span class="brain-emoji">🧠</span>
+        <div class="before-after">
+          <div class="ba-card before">
+            <div class="ba-label">BEFORE</div>
+            <div class="ba-value" style="font-size:16px;color:rgba(255,255,255,0.5)">불안 · 무기력<br>선택 회피</div>
+          </div>
+          <div class="ba-card after">
+            <div class="ba-label">AFTER</div>
+            <div class="ba-value" style="font-size:16px">자신감 · 그릿<br>자아 발견</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY / SELF-DISCOVERY -->
+<section class="identity-section" id="identity">
+  <div class="container">
+    <div class="section-badge">🌱 자아 발견의 여정</div>
+    <h2 class="section-title">선택의 자유를 되찾을 때<br><span class="em">나는 누구인가</span>를 발견한다</h2>
+    <p class="section-desc">
+      여행의 매 순간은 선택입니다. 이 선택의 연속이 상실했던 자아를 되찾는 과정입니다.
+    </p>
+
+    <div class="choice-journey">
+      <div class="choice-step active">
+        <div class="choice-num">1</div>
+        <div class="choice-step-title">선택 박탈</div>
+        <p class="choice-step-text">학교·집에서 타인의 기대대로 살며 "나"를 잃어버린 상태</p>
+      </div>
+      <div class="choice-step active">
+        <div class="choice-num">2</div>
+        <div class="choice-step-title">첫 선택의 경험</div>
+        <p class="choice-step-text">여행지에서 처음으로 내가 먹을 것, 갈 곳을 고릅니다. 작은 성공.</p>
+      </div>
+      <div class="choice-step active">
+        <div class="choice-num">3</div>
+        <div class="choice-step-title">고생과 극복</div>
+        <p class="choice-step-text">힘든 상황에서도 포기하지 않는 선택. 그릿(Grit)이 자랍니다.</p>
+      </div>
+      <div class="choice-step active">
+        <div class="choice-num">4</div>
+        <div class="choice-step-title">자아 실현</div>
+        <p class="choice-step-text">"나는 이런 사람이구나" — 자아를 발견하고 삶의 방향을 세웁니다.</p>
+      </div>
+    </div>
+
+    <div class="identity-story">
+      <div class="story-grid">
+        <div class="story-text">
+          <h3>📖 "고생이 교육이 되는 순간"</h3>
+          <p>히메지 성 가는 길이 예상보다 길었습니다. 땡볕에 아이는 "돌아가자"고 했습니다. 그 순간이 바로 <strong>선택의 순간</strong>입니다.</p>
+          <p>포기할까, 계속 갈까. 어른이 대신 결정해주지 않습니다. 아이가 직접 선택합니다. <strong>그 선택의 무게가 아이를 성장시킵니다.</strong></p>
+          <p>교토의 골목에서 길을 잃었을 때, 오사카에서 주문이 안 될 때 — 이 모든 불편함이 살아있는 교육입니다. <strong>뇌파는 이 순간 세타파가 높아지며 깊은 학습이 일어남을 보여줍니다.</strong></p>
+        </div>
+        <div class="story-cards">
+          <div class="story-card">
+            <div class="story-card-icon">🎯</div>
+            <div>
+              <div class="story-card-title">선택의 자유 → 자기효능감</div>
+              <p class="story-card-text">내가 선택하고, 그 결과를 경험하면서 "나는 할 수 있다"는 감각이 자랍니다. 이것이 자기효능감의 뿌리입니다.</p>
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-card-icon">💪</div>
+            <div>
+              <div class="story-card-title">고생 → 그릿(GRIT) 형성</div>
+              <p class="story-card-text">Angela Duckworth의 연구에 따르면 그릿은 훈련됩니다. 여행의 어려움을 극복하는 경험이 포기하지 않는 힘을 키웁니다.</p>
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-card-icon">🔍</div>
+            <div>
+              <div class="story-card-title">자아 발견 → 진로 연결</div>
+              <p class="story-card-text">"나는 사람들과 함께할 때 행복하다", "나는 자연이 좋다" — 여행 중 발견한 자아가 진로의 실마리가 됩니다.</p>
+            </div>
+          </div>
+          <div class="story-card">
+            <div class="story-card-icon">🧠</div>
+            <div>
+              <div class="story-card-title">뇌파 변화 → 삶의 태도 변화</div>
+              <p class="story-card-text">알파파 증가와 베타파(스트레스) 감소는 더 유연하고 창의적인 사고로의 전환을 의미합니다. 데이터가 변화를 증명합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUTUBE SECTION -->
+<section class="youtube-section" id="youtube">
+  <div class="container">
+    <div class="section-badge">🎬 유튜브 자존감 회복 프로젝트</div>
+    <h2 class="section-title">내 이야기를 영상으로<br><span class="em">잃어버린 자존감을 되찾는다</span></h2>
+    <p class="section-desc">남의 영상을 소비하던 청소년이 자신의 이야기를 만듭니다. 여행 유튜브 영상 제작이 자존감 회복의 마지막 열쇠입니다.</p>
+
+    <div class="yt-grid">
+      <div class="yt-left">
+        <h3>✏️ 내가 주인공인 이야기</h3>
+        <p>SNS에서 남의 화려한 여행을 보며 "나는 저런 게 없어"라고 위축되던 아이가, 이제는 자신의 진짜 이야기를 카메라에 담습니다. 완벽하지 않아도 괜찮습니다. 오히려 그 고생의 순간들이 가장 빛나는 콘텐츠가 됩니다.</p>
+        <div class="yt-steps">
+          <div class="yt-step">
+            <div class="yt-step-num">1</div>
+            <div class="yt-step-content">
+              <div class="yt-step-title">📱 여행 중 촬영 · 기록</div>
+              <p class="yt-step-text">매일 스마트폰으로 솔직한 순간들을 담습니다. 힘든 모습, 웃긴 실수, 감동의 장면 모두 OK.</p>
+            </div>
+          </div>
+          <div class="yt-step">
+            <div class="yt-step-num">2</div>
+            <div class="yt-step-content">
+              <div class="yt-step-title">✂️ 귀국 크루즈에서 편집</div>
+              <p class="yt-step-text">돌아오는 배 위에서 영상 편집 워크숍. 내 이야기를 어떻게 담을지 직접 결정합니다.</p>
+            </div>
+          </div>
+          <div class="yt-step">
+            <div class="yt-step-num">3</div>
+            <div class="yt-step-content">
+              <div class="yt-step-title">🚀 채널 개설 & 첫 업로드</div>
+              <p class="yt-step-text">내 이름으로 채널을 만들고 첫 영상을 업로드합니다. "나의 목소리"가 세상에 나가는 순간.</p>
+            </div>
+          </div>
+          <div class="yt-step">
+            <div class="yt-step-num">4</div>
+            <div class="yt-step-content">
+              <div class="yt-step-title">💬 K-MediWell 커뮤니티 공유</div>
+              <p class="yt-step-text">선생님·부모님·친구들과 영상 나누기. "나도 이런 걸 만들었어!" 자존감의 완성.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="yt-right">
+        <div class="video-mockup">
+          <div class="vm-header">
+            <div class="vm-dot"></div><div class="vm-dot"></div><div class="vm-dot"></div>
+            <span style="color:rgba(255,255,255,0.3);font-size:12px;margin-left:auto">그릿행복여행 2026</span>
+          </div>
+          <div class="vm-screen">
+            <div class="vm-overlay">
+              <div class="vm-title-text">고생했지만 행복했다 — 5박 6일 간사이</div>
+              <div class="vm-subtitle">K-MediWell 그릿행복여행 | 나의 뇌파 변화 기록</div>
+            </div>
+            <div class="vm-play">▶</div>
+          </div>
+          <div class="vm-info">
+            <div class="vm-stat">
+              <div class="vm-stat-num">5박6일</div>
+              <div class="vm-stat-label">여행 기간</div>
+            </div>
+            <div class="vm-stat">
+              <div class="vm-stat-num">3회</div>
+              <div class="vm-stat-label">뇌파 측정</div>
+            </div>
+            <div class="vm-stat">
+              <div class="vm-stat-num">1개</div>
+              <div class="vm-stat-label">나만의 채널</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="values-section" id="values">
+  <div class="container">
+    <div class="section-badge">💎 핵심 가치</div>
+    <h2 class="section-title">여행이 교육이 되는 순간<br><span style="color:var(--gold)">Core Values</span></h2>
+    <p class="section-desc">그릿행복여행이 다른 여행과 다른 세 가지 이유</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">🧠</span>
+        <div class="value-title">과학 기반 데이터: 뇌과학적 입증</div>
+        <p class="value-text">막연한 느낌이 아닌 실시간 뇌파 측정을 통해 여행의 효능을 과학적으로 증명합니다. BQ2/BFAR 뇌파 분석으로 알파파, 세타파, 반구 균형 변화를 추적하여 참여자 개인에게 맞춤형 피드백을 제공합니다.</p>
+        <div class="value-highlight">📊 K-MediWell Neuroharmony EEG 시스템</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">💡</span>
+        <div class="value-title">고생을 지혜로 바꾸는 선택의 교육</div>
+        <p class="value-text">아이와 함께하는 힘든 여행 순간을 숙고 시스템을 통해 '뿌듯한 경험'으로 전환합니다. 매 순간의 선택이 학교에서 배울 수 없는 살아있는 교육이 됩니다. 서효봉 작가의 철학을 현장에서 실천합니다.</p>
+        <div class="value-highlight">🌱 자기효능감 + 그릿(GRIT) 함양</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🎬</span>
+        <div class="value-title">유튜브 제작을 통한 자존감 회복</div>
+        <p class="value-text">자신의 여행 이야기를 영상 콘텐츠로 기록하며 상실되었던 자존감을 스스로 치유하고 강화합니다. 창작의 경험이 "나는 무언가를 만들 수 있는 사람"이라는 정체성을 만듭니다.</p>
+        <div class="value-highlight">📺 삶을 창조하는 여행 YouTube</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY CTA -->
+<section class="apply-section" id="apply">
+  <div class="container">
+    <h2>지금, 진짜 나를<br>만나러 떠날 준비가 됐나요?</h2>
+    <p>2026년 7월 2일~7일. 팬스타 크루즈로 부산 출항.<br>뇌파가 바뀌고, 삶이 바뀌는 5박 6일.</p>
+    <div class="apply-info">
+      <div class="apply-info-item">
+        <div class="label">출발일</div>
+        <div class="value">2026. 7. 2</div>
+      </div>
+      <div class="apply-info-item">
+        <div class="label">기간</div>
+        <div class="value">5박 6일</div>
+      </div>
+      <div class="apply-info-item">
+        <div class="label">코스</div>
+        <div class="value">히메지·고베·교토·오사카</div>
+      </div>
+      <div class="apply-info-item">
+        <div class="label">정원</div>
+        <div class="value">선착순 마감</div>
+      </div>
+    </div>
+    <a href="https://yongkeunyi.github.io/osakatravel/" class="apply-btn" target="_blank">
+      🚀 상세 일정 & 참가 신청하기
+    </a>
+  </div>
+</section>
+
+<footer>
+  <strong>국립공주대학교 스마트의료웰니스관광대학원 K-MediWell 그릿행복여행팀</strong><br>
+  K-MediWell Research Group · Natural Healing Tourism Forum<br>
+  참고: 서효봉, 『여행이 교육이 되는 순간』 · 팬스타 미라클 크루즈 · 세종한글여행사<br><br>
+  © 2026 K-MediWell Grit Happiness Travel. All rights reserved.
+</footer>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for(let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    const size = Math.random() * 60 + 10;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*15+10}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    container.appendChild(p);
+  }
+
+  // Choice steps active on scroll
+  const steps = document.querySelectorAll('.choice-step');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        steps.forEach((s,i) => {
+          setTimeout(() => s.classList.add('active'), i * 200);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  if(steps[0]) observer.observe(steps[0]);
+</script>
+</body>
+</html>
